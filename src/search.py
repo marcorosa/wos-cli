@@ -13,8 +13,8 @@ from wos import WosClient
 def _draw_table(data):
     # Generate table
     tab = tt.Texttable()
-    tab.add_rows(data)
     tab.set_cols_align(['l', 'l', 'l'])
+    tab.add_rows(data, header=False)
     tab.header(['Year', 'Title', 'ID WOS'])
     tab.set_cols_width([5, 55, 20])  # Use fixed terminal dimension (80 char)
     s = tab.draw()
