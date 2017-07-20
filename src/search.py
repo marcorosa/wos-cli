@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 
 from config import user_id, password
 from datetime import date
+from operator import itemgetter
 from six import print_
 from wos import WosClient
 
@@ -24,8 +25,9 @@ def search(author, years, results, affiliation=None):
     try:
         client = WosClient(user_id, password)
         client.connect()
-    except suds.WebFault:
+    except suds.WebFault as e:
         print_('Username and/or password not valid')
+        print_(e)
         exit(1)
 
     # Build query
@@ -68,5 +70,5 @@ def search(author, years, results, affiliation=None):
             if title.attrib['type'] == 'item':
                 paper = title.text
         res.append([year, paper, idwos])
-    res.sort(key=lambda x: x[0], reverse=True)
+    res = sorted(res, key=itemgetter(0), reverse=True)
     _draw_table(res)
