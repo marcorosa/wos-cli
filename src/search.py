@@ -1,9 +1,10 @@
-import xml.etree.ElementTree as ET
-import texttable as tt
 import re
+import texttable as tt
+import xml.etree.ElementTree as ET
 
 from config import user_id, password
 from datetime import date
+from six import print_
 from wos import WosClient
 
 
@@ -15,7 +16,7 @@ def _draw_table(data):
     tab.header(['Year', 'Title', 'ID WOS'])
     tab.set_cols_width([5, 55, 20])  # Use fixed terminal dimension (80 char)
     s = tab.draw()
-    print s
+    print_(s)
 
 
 def search(author, years, results):
