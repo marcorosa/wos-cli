@@ -28,7 +28,11 @@ There is also the possibility to specify the timespan and the number of pubblica
 python start.py "Surname Name" -y 10 -r 25
 ```
 
-## Nota Bene
-AFFILIATION:
-When entering full names, do not use articles (a, an, the) and prepositions (of, in, for) in the name.
-For example, entering UNIV Pennsyvania is OK but entering University of Pennsylvania results in an error message.
+## Nota Bene (from `webofknowledge.com`)
+- AFFILIATION:
+  When entering full names, do not use articles (a, an, the) and prepositions
+  (of, in, for) in the name. For example, entering UNIV Pennsyvania is OK but
+  entering University of Pennsylvania results in an error message.
+- AUTHOR:
+  Enter the last name first followed by a space and the author's name (or
+  initials).
