@@ -12,7 +12,7 @@ def _draw_table(data):
     tab = tt.Texttable()
     tab.add_rows(data)
     tab.set_cols_align(['l', 'l', 'l'])
-    tab.header(['year', 'id', 'title'])
+    tab.header(['Year', 'Title', 'ID WOS'])
     tab.set_cols_width([5, 55, 20])  # Use fixed terminal dimension (80 char)
     s = tab.draw()
     print s
