@@ -39,6 +39,13 @@ def search(author, years, results):
     my_xml = re.sub(' xmlns="[^"]+"', '', sq.records, count=1).encode('utf-8')
     tree = ET.fromstring(my_xml)
 
+    n = len(list(tree))
+    if n > 0:
+        print_('Found %s papers' % n)
+    else:
+        print_('No papers found for %s in the last %s years' % (author, years))
+        exit(0)
+
     # Get results
     res = []
     for t in tree:
