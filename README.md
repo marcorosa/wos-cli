@@ -23,6 +23,12 @@ python start.py "Surname Name"
 There is also the possibility to specify the timespan and the number of pubblications:
 * `-y YEARS` (default 5)
 * `-r RESULTS` (default 100)
+* `-A AFFILIATION` (see note below)
 ```bash
 python start.py "Surname Name" -y 10 -r 25
 ```
+
+## Nota Bene
+AFFILIATION:
+When entering full names, do not use articles (a, an, the) and prepositions (of, in, for) in the name.
+For example, entering UNIV Pennsyvania is OK but entering University of Pennsylvania results in an error message.

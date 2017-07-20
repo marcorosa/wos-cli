@@ -1,4 +1,5 @@
 import re
+import suds
 import texttable as tt
 import xml.etree.ElementTree as ET
 
@@ -19,12 +20,19 @@ def _draw_table(data):
     print_(s)
 
 
-def search(author, years, results):
-    client = WosClient(user_id, password)
-    client.connect()
+def search(author, years, results, affiliation=None):
+    try:
+        client = WosClient(user_id, password)
+        client.connect()
+    except suds.WebFault:
+        print_('Username and/or password not valid')
+        exit(1)
 
     # Build query
-    query = 'AU=%s' % author
+    if affiliation:
+        query = 'AU=%s AND AD=%s' % (author, affiliation)
+    else:
+        query = 'AU=%s' % author
 
     # Build timespan
     current_year = date.today().year
