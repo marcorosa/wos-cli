@@ -1,9 +1,10 @@
+from src import search
 import argparse
 
 
 def main():
     """Main method."""
-    parser = argparse.ArgumentParser(description='Look for an author in the Web of Science.')
+    parser = argparse.ArgumentParser(description='Look for an author in Web of Science.')
     parser.add_argument('author', help='Surname and name of the author')
     parser.add_argument('-v', '--verbose', action='store_true', help='Verbose')
     parser.add_argument('-r', '--results', type=int, default=100,
@@ -14,10 +15,8 @@ def main():
 
     args = parser.parse_args()
 
-    author = args.author
-    years = args.years
-    aff = args.affiliation
-    results = args.results
+    # Search the author
+    search.search(args.author, args.years, args.results, args.affiliation)
 
 
 if __name__ == '__main__':
