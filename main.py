@@ -20,7 +20,7 @@ def main():
 
     # Search the author
     results = search.search(args.author, args.years, args.results, args.affiliation)
-    if args.save:
+    if args.save and len(results) > 0:
         # Save in db
         print_('Save records in db')
         dbconn.save(args.author.lower(), results)
