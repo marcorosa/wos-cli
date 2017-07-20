@@ -20,10 +20,11 @@ Launch the main file
 ```bash
 python start.py "Surname Name"
 ```
-There is also the possibility to specify the timespan and the number of pubblications:
-* `-y YEARS` (default 5)
-* `-r RESULTS` (default 100)
-* `-A AFFILIATION` (see note below)
+There is also the possibility to specify the query:
+* `-y YEARS` (default 5): time interval to take into consideration
+* `-r RESULTS` (default 100): max number of records to show
+* `-A AFFILIATION` (see note below): affiliation of the author
+* `--save`: save results in a database
 ```bash
 python start.py "Surname Name" -y 10 -r 25
 ```
