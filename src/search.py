@@ -68,4 +68,5 @@ def search(author, years, results, affiliation=None):
             if title.attrib['type'] == 'item':
                 paper = title.text
         res.append([year, paper, idwos])
+    res.sort(key=lambda x: x[0], reverse=True)
     _draw_table(res)
