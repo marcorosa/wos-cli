@@ -1,8 +1,8 @@
 import xml.etree.ElementTree as ET
 import re
+import texttable as tt
 
 from config import user_id, password
-from tabulate import tabulate
 from wos import WosClient
 
 
@@ -34,7 +34,11 @@ for t in tree:
             paper = title.text
     res.append([year, paper, idwos])
 
-print tabulate(res,
-               headers=['year', 'id', 'title'],
-               tablefmt='fancy_grid',
-               missingval='?')
+# Generate table
+tab = tt.Texttable()
+tab.add_rows(res)
+tab.set_cols_align(['l', 'l', 'l'])
+tab.header(['year', 'id', 'title'])
+tab.set_cols_width([5, 55, 20])  # Use fixed terminal dimension (80 char)
+s = tab.draw()
+print s
