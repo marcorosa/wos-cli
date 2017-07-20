@@ -102,3 +102,6 @@ ENV/
 
 # credentials
 config.py
+
+# DB
+*.db

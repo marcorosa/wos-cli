@@ -72,3 +72,4 @@ def search(author, years, results, affiliation=None):
         res.append([year, paper, idwos])
     res = sorted(res, key=itemgetter(0), reverse=True)
     _draw_table(res)
+    return res

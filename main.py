@@ -1,5 +1,7 @@
-from src import search
 import argparse
+
+from six import print_
+from src import search, dbconn
 
 
 def main():
@@ -12,11 +14,17 @@ def main():
     parser.add_argument('-y', '--years', type=int, default=5,
                         help='Max age of shown papers')
     parser.add_argument('-A', '--affiliation', help='Affiliation of the author')
+    parser.add_argument('--save', action='store_true', help='save results in a db')
 
     args = parser.parse_args()
 
     # Search the author
-    search.search(args.author, args.years, args.results, args.affiliation)
+    results = search.search(args.author, args.years, args.results, args.affiliation)
+    if args.save:
+        # Save in db
+        print_('Save records in db')
+        dbconn.save(args.author.lower(), results)
+        print_('Completed!')
 
 
 if __name__ == '__main__':
