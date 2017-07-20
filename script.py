@@ -1,7 +1,9 @@
-from wos import WosClient
 import xml.etree.ElementTree as ET
 import re
+
 from config import user_id, password
+from tabulate import tabulate
+from wos import WosClient
 
 
 client = WosClient(user_id, password)
@@ -17,6 +19,8 @@ sp5 = client.search('AU=Surname Name',
 my_xml = re.sub(' xmlns="[^"]+"', '', sp5.records, count=1).encode('utf-8')
 tree = ET.fromstring(my_xml)
 
+# Get results
+res = []
 for t in tree:
     element = list(t)
     idwos = element[0].text
@@ -28,8 +32,9 @@ for t in tree:
     for title in titles:
         if title.attrib['type'] == 'item':
             paper = title.text
-    print 'ID WOS: %s' % idwos
-    print 'YEAR %s' % year
-    print 'TITLE: %s' % paper
-    print '-' * 30
+    res.append([year, paper, idwos])
 
+print tabulate(res,
+               headers=['year', 'id', 'title'],
+               tablefmt='fancy_grid',
+               missingval='?')
