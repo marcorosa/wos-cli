@@ -103,5 +103,6 @@ ENV/
 # credentials
 config.py
 
-# DB
+# Data files
+*.csv
 *.db
