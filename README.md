@@ -29,6 +29,20 @@ There is also the possibility to specify the query:
 python start.py "Surname Name" -y 10 -r 25
 ```
 
+## Example
+```bash
+$ python main.py 'knuth donald' -y 10 -A stanford
+Authenticated (SID: xxxxxxxxx)
+Found 2 papers
++-------+---------------------------------------------------------+----------------------+
+| Year  |                          Title                          |        ID WOS        |
++=======+=========================================================+======================+
+| 2016  | A Twisted Enumeration of the Positive Integers          | WOS:000370069600012  |
++-------+---------------------------------------------------------+----------------------+
+| 2011  | Mathematical Vanity Plates                              | WOS:000287850200007  |
++-------+---------------------------------------------------------+----------------------+
+```
+
 ## Nota Bene (from `webofknowledge.com`)
 - AFFILIATION:
   When entering full names, do not use articles (a, an, the) and prepositions
