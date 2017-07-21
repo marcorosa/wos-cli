@@ -23,7 +23,7 @@ def _filter_records(author, records):
         c.execute('SELECT * FROM authors WHERE author = ?', (author,))
         all_rec = c.fetchall()
     all_ids = map(lambda x: x[3], all_rec)
-    records = filter(lambda x: x[2] not in all_ids, records)
+    records = list(filter(lambda x: x[2] not in all_ids, records))
     print_('Found %s new records' % len(records))
     return records
 

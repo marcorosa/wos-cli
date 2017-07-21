@@ -3,7 +3,7 @@ import suds
 import texttable as tt
 import xml.etree.ElementTree as ET
 
-from config import user_id, password
+from .config import user_id, password
 from datetime import date
 from operator import itemgetter
 from six import print_
@@ -38,12 +38,13 @@ def search(author, years, results, affiliation=None):
 
     # Build timespan
     current_year = date.today().year
+    date_start = '{}-01-01'.format(current_year - years)
+    date_stop = '{}-01-01'.format(current_year + 1)
 
     sq = client.search(query,
                        count=results,
                        offset=1,
-                       timeSpan={'begin': '%s-01-01' % (current_year - years),
-                                 'end': '%s-01-01' % (current_year + 1)})
+                       timeSpan={'begin': date_start, 'end': date_stop})
 
     # Format xml
     my_xml = re.sub(' xmlns="[^"]+"', '', sq.records, count=1).encode('utf-8')
