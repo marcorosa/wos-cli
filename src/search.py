@@ -21,15 +21,7 @@ def _draw_table(data):
     print_(s)
 
 
-def search(author, years, results, affiliation=None):
-    try:
-        client = WosClient(user_id, password)
-        client.connect()
-    except suds.WebFault as e:
-        print_('Username and/or password not valid, or requests limit exceeded')
-        print_(e)
-        exit(1)
-
+def query(client, author, years, results, affiliation=None):
     # Build query
     if affiliation:
         query = 'AU=%s AND AD=%s' % (author, affiliation)
@@ -56,14 +48,34 @@ def search(author, years, results, affiliation=None):
     else:
         print_('No papers found for %s in the last %s years' % (author, years))
         exit(0)
+    return tree
 
+
+def tree_extractor(tree):
     # Get results
-    res = []
+    results = []
     for t in tree:
         idwos = t.find('UID').text
         year = t.find('.//pub_info').attrib.get('pubyear', '?')
         paper = t.find('.//title[@type="item"]').text
-        res.append([year, paper, idwos])
-    res = sorted(res, key=itemgetter(0), reverse=True)
-    _draw_table(res)
-    return res
+        results.append([year, paper, idwos])
+    results = sorted(results, key=itemgetter(0), reverse=True)
+    return results
+
+
+def search(author, years, results, affiliation=None):
+    try:
+        client = WosClient(user_id, password)
+        client.connect()
+    except suds.WebFault as e:
+        print_('Username and/or password not valid, or requests limit exceeded')
+        print_(e)
+        exit(1)
+
+    # Build the tree
+    tree = query(client, author, years, results, affiliation)
+    # Extract information from the tree
+    results = tree_extractor(tree)
+    # Draw the table
+    _draw_table(results)
+    return results
