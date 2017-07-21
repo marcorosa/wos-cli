@@ -26,7 +26,7 @@ def search(author, years, results, affiliation=None):
         client = WosClient(user_id, password)
         client.connect()
     except suds.WebFault as e:
-        print_('Username and/or password not valid')
+        print_('Username and/or password not valid, or requests limit exceeded')
         print_(e)
         exit(1)
 
@@ -59,16 +59,9 @@ def search(author, years, results, affiliation=None):
     # Get results
     res = []
     for t in tree:
-        element = list(t)
-        idwos = element[0].text
-        data = list(element[1])    # static_data
-        summary = list(data[0])    # summary
-        titles = list(summary[2])  # titles
-        year = summary[1].attrib['pubyear']
-        paper = ''
-        for title in titles:
-            if title.attrib['type'] == 'item':
-                paper = title.text
+        idwos = t.find('UID').text
+        year = t.find('.//pub_info').attrib.get('pubyear', '?')
+        paper = t.find('.//title[@type="item"]').text
         res.append([year, paper, idwos])
     res = sorted(res, key=itemgetter(0), reverse=True)
     _draw_table(res)
