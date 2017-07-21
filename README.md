@@ -4,8 +4,8 @@ Simple command line interface for querying wos
 ## Installation
 Download the repository
 ```bash
-git clone https://github.com/marcorosa/CC-Botnet-in-Python
-cd CC-Botnet-in-Python
+git clone https://github.com/marcorosa/wos-cli
+cd wos-cli
 ```
 Install dependencies
 ```bash
