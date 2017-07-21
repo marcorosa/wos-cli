@@ -4,7 +4,7 @@ import sqlite3
 from six import print_
 
 
-DBFILE = 'author_wos.db'
+DBFILE = 'data/authors.db'
 
 
 def _init_db(dbfile):
